@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:42:44 by pedro             #+#    #+#             */
-/*   Updated: 2023/06/27 19:31:43 by pedro            ###   ########.fr       */
+/*   Updated: 2023/06/27 21:01:13 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,26 @@ void	refresh_images_player(t_game *game, int x, int y, char flag)
 {
 	mlx_clear_window(game->initmlx, game->winmlx);
 	put_images(game);
-	mlx_put_image_to_window(game->initmlx, game->winmlx, game->floor.ptr, x * 64, y * 64);
-	mlx_put_image_to_window(game->initmlx, game->winmlx, game->exit.ptr, game->exit_x * 64, game->exit_y * 64);
+	mlx_put_image_to_window(game->initmlx, game->winmlx, game->floor.ptr, x
+		* 64, y * 64);
+	mlx_put_image_to_window(game->initmlx, game->winmlx, game->exit.ptr,
+		game->exit_x * 64, game->exit_y * 64);
 	if (flag == 'w')
-	{
-		mlx_put_image_to_window(game->initmlx, game->winmlx, game->floor.ptr, x * 64, (y - 1) * 64);
-		mlx_put_image_to_window(game->initmlx, game->winmlx, game->player.ptr, x * 64, (y - 1) * 64);
-	}
+		container(game, x, y - 1);
 	else if (flag == 'a')
-	{
-		mlx_put_image_to_window(game->initmlx, game->winmlx, game->floor.ptr, (x - 1) * 64, y * 64);
-		mlx_put_image_to_window(game->initmlx, game->winmlx, game->player.ptr, (x - 1) * 64, y * 64);
-	}
+		container(game, x - 1, y);
 	else if (flag == 's')
-	{
-		mlx_put_image_to_window(game->initmlx, game->winmlx, game->floor.ptr, x * 64, (y + 1) * 64);
-		mlx_put_image_to_window(game->initmlx, game->winmlx, game->player.ptr, x * 64, (y + 1) * 64);
-	}
+		container(game, x, y + 1);
 	else if (flag == 'd')
-	{
-		mlx_put_image_to_window(game->initmlx, game->winmlx, game->floor.ptr, (x + 1) * 64, y * 64);
-		mlx_put_image_to_window(game->initmlx, game->winmlx, game->player.ptr, (x + 1) * 64, y * 64);
-	}
+		container(game, x + 1, y);
+}
+
+void	container(t_game *game, int x, int y)
+{
+	mlx_put_image_to_window(game->initmlx, game->winmlx, game->floor.ptr, x
+		* 64, y * 64);
+	mlx_put_image_to_window(game->initmlx, game->winmlx, game->player.ptr, x
+		* 64, y * 64);
 }
 
 void	destroy_images(t_game *game)

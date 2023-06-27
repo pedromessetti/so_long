@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 19:21:18 by pedro             #+#    #+#             */
-/*   Updated: 2023/06/26 23:23:14 by pedro            ###   ########.fr       */
+/*   Updated: 2023/06/27 20:56:21 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,36 @@ void	init_images(t_game *game)
 	put_images(game);
 }
 
-void put_images(t_game *game)
+void	put_images(t_game *game)
 {
-    int x;
-    int y;
+	int	x;
+	int	y;
 
-    y = -1;
-    while (game->map[++y])
-    {
-        x = -1;
-        while (game->map[y][++x])
-        {
-            if (game->map[y][x] == '0' || game->map[y][x] == 'P'
-                || game->map[y][x] == 'C' || game->map[y][x] == 'E')
-                mlx_put_image_to_window(game->initmlx, game->winmlx, game->floor.ptr, x * 64, y * 64);
-            if (game->map[y][x] == 'P')
-                mlx_put_image_to_window(game->initmlx, game->winmlx, game->player.ptr, x * 64, y * 64);
-            else if (game->map[y][x] == 'C')
-                mlx_put_image_to_window(game->initmlx, game->winmlx, game->collect.ptr, x * 64, y * 64);
-            else if (game->map[y][x] == '1')
-                mlx_put_image_to_window(game->initmlx, game->winmlx, game->wall.ptr, x * 64, y * 64);
-            else if (game->map[y][x] == 'E')
-                mlx_put_image_to_window(game->initmlx, game->winmlx, game->exit.ptr, x * 64, y * 64);
-        }
-    }
+	y = -1;
+	while (game->map[++y])
+	{
+		x = -1;
+		while (game->map[y][++x])
+			choose_image(game, y, x);
+	}
+}
+
+void	choose_image(t_game *game, int y, int x)
+{
+	if (game->map[y][x] == '0' || game->map[y][x] == 'P'
+		|| game->map[y][x] == 'C' || game->map[y][x] == 'E')
+		mlx_put_image_to_window(game->initmlx, game->winmlx, game->floor.ptr, x
+			* 64, y * 64);
+	if (game->map[y][x] == 'P')
+		mlx_put_image_to_window(game->initmlx, game->winmlx, game->player.ptr, x
+			* 64, y * 64);
+	else if (game->map[y][x] == 'C')
+		mlx_put_image_to_window(game->initmlx, game->winmlx, game->collect.ptr,
+			x * 64, y * 64);
+	else if (game->map[y][x] == '1')
+		mlx_put_image_to_window(game->initmlx, game->winmlx, game->wall.ptr, x
+			* 64, y * 64);
+	else if (game->map[y][x] == 'E')
+		mlx_put_image_to_window(game->initmlx, game->winmlx, game->exit.ptr, x
+			* 64, y * 64);
 }

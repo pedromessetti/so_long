@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 08:43:44 by pedro             #+#    #+#             */
-/*   Updated: 2023/06/27 12:04:29 by pedro            ###   ########.fr       */
+/*   Updated: 2023/06/27 21:02:45 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include "../libft/inc/libft.h"
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
-# include <stdio.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -76,10 +76,11 @@ t_data		create_image(char *path, t_game *game);
 void		put_images(t_game *game);
 void		put_pixel(t_game *game, int x, int y, int color);
 void		load_images(t_data *image, t_game *game, int x_pos, int y_pos);
-void		refresh_images_player(t_game *game, int x, int y,
-				char flag);
+void		refresh_images_player(t_game *game, int x, int y, char flag);
 void		destroy_images(t_game *game);
 int			read_characters(t_game *game);
+void		choose_image(t_game *game, int y, int x);
+void		container(t_game *game, int x, int y);
 
 /* --- Map Functions --- */
 
