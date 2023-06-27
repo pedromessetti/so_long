@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:42:44 by pedro             #+#    #+#             */
-/*   Updated: 2023/06/26 23:31:03 by pedro            ###   ########.fr       */
+/*   Updated: 2023/06/27 19:31:43 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	refresh_images_player(t_game *game, int x_pos, int y_pos, char flag)
 {
 	load_images(&game->floor, game, x_pos, y_pos);
 	load_images(&game->exit, game, game->exit_x, game->exit_y);
-	if (game->collect_count == 0)
-		load_images(&game->exit, game, game->exit_x, game->exit_y);
 	if (flag == 'w')
 	{
 		load_images(&game->floor, game, x_pos, y_pos - 1);
