@@ -23,7 +23,7 @@ void	check_ac(int ac)
 	}
 	else
 	{
-		write(2, "Error: Too few aguments\n", 25);
+		write(2, "Error: Too few aguments\n", 24);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -50,22 +50,22 @@ int	check_fd(char *filepath)
 int	check_limits(t_game *game)
 {
 	int	i;
-	int	lp;
+	int	j;
 
-	lp = game->map_height - 1;
+	j = game->map_height - 1;
 	i = 0;
 	while (i < game->map_width)
 	{
-		if (game->map[0][i] == '1' && game->map[lp][i] == '1')
+		if (game->map[0][i] == '1' && game->map[j][i] == '1')
 			i++;
 		else
 			return (0);
 	}
-	lp = game->map_width - 1;
+	j = game->map_width - 1;
 	i = 0;
 	while (i < game->map_height)
 	{
-		if (game->map[i][0] == '1' && game->map[i][lp] == '1')
+		if (game->map[i][0] == '1' && game->map[i][j] == '1')
 			i++;
 		else
 			return (0);

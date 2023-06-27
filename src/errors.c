@@ -17,9 +17,11 @@ void	flood_fill(char **map, int x, int y, int *counter)
 	if (map[y][x] == 'C' || map[y][x] == 'E')
 		*counter += 1;
 	if (map[y][x] == 'E')
+	{
 		map[y][x] = '1';
-	else
-		map[y][x] = 'F';
+		return ;
+	}
+	map[y][x] = 'F';
 	if (map[y][x + 1] != '1' && map[y][x + 1] != 'F')
 		flood_fill(map, x + 1, y, counter);
 	if (map[y][x - 1] != '1' && map[y][x - 1] != 'F')

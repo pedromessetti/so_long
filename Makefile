@@ -45,6 +45,7 @@ $(NAME):	$(OBJS)
 	if [ ! -f ./libft/libft.a ]; then \
 		$(MAKE) run -C ./libft/; \
 	fi
+	$(MAKE) -C ./minilibx/
 	$(CC) -o $(NAME) $(OBJS) $(LFLAGS)
 	echo "\\n$(GREEN)$(REPEATED_CHARS)$(RESET)" 
 	echo "$(WHITE)	$(NAME)"

@@ -14,11 +14,11 @@
 # define SO_LONG_H
 
 # include "../libft/inc/libft.h"
+# include "../minilibx/mlx.h"
+# include "../minilibx/mlx_int.h"
+# include <stdio.h>
 # include <errno.h>
 # include <fcntl.h>
-# include <mlx.h>
-# include <mlx_int.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
