@@ -13,7 +13,7 @@ NAME = so_long
 INC = /usr/local/include
 INCFT = ./libft/inc
 LIBFT = ./libft/libft.a
-LIBMLX = ./minilibx/libmlx_Linux.a ./minilibx/libmlx.a
+LIBMLX = ./minilibx-linux/libmlx_Linux.a ./minilibx-linux/libmlx.a
 
 UNAME := $(shell uname)
 
@@ -45,7 +45,7 @@ $(NAME):	$(OBJS)
 	if [ ! -f ./libft/libft.a ]; then \
 		$(MAKE) run -C ./libft/; \
 	fi
-	$(MAKE) -C ./minilibx/
+	$(MAKE) -C ./minilibx-linux/
 	$(CC) -o $(NAME) $(OBJS) $(LFLAGS)
 	echo "\\n$(GREEN)$(REPEATED_CHARS)$(RESET)" 
 	echo "$(WHITE)	$(NAME)"

@@ -14,8 +14,9 @@
 
 void	move_w(t_game *game)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	char	*moves;
 
 	x = game->player_x;
 	y = game->player_y;
@@ -31,13 +32,16 @@ void	move_w(t_game *game)
 	game->map[y - 1][x] = 'P';
 	game->player_y--;
 	game->moves_count++;
-	ft_printf("Moves: %d\n", game->moves_count);
+	moves = ft_itoa(game->moves_count);
+	mlx_string_put(game->initmlx, game->winmlx, 100, 100, 0x00FFFFFF, moves);
+	free(moves);
 }
 
 void	move_s(t_game *game)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	char	*moves;
 
 	x = game->player_x;
 	y = game->player_y;
@@ -53,13 +57,16 @@ void	move_s(t_game *game)
 	game->map[y + 1][x] = 'P';
 	game->player_y++;
 	game->moves_count++;
-	ft_printf("Moves: %d\n", game->moves_count);
+	moves = ft_itoa(game->moves_count);
+	mlx_string_put(game->initmlx, game->winmlx, 100, 100, 0x00FFFFFF, moves);
+	free(moves);
 }
 
 void	move_a(t_game *game)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	char	*moves;
 
 	x = game->player_x;
 	y = game->player_y;
@@ -75,13 +82,16 @@ void	move_a(t_game *game)
 	game->map[y][x - 1] = 'P';
 	game->player_x--;
 	game->moves_count++;
-	ft_printf("Moves: %d\n", game->moves_count);
+	moves = ft_itoa(game->moves_count);
+	mlx_string_put(game->initmlx, game->winmlx, 100, 100, 0x00FFFFFF, moves);
+	free(moves);
 }
 
 void	move_d(t_game *game)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	char	*moves;
 
 	x = game->player_x;
 	y = game->player_y;
@@ -97,7 +107,9 @@ void	move_d(t_game *game)
 	game->map[y][x + 1] = 'P';
 	game->player_x++;
 	game->moves_count++;
-	ft_printf("Moves: %d\n", game->moves_count);
+	moves = ft_itoa(game->moves_count);
+	mlx_string_put(game->initmlx, game->winmlx, 100, 100, 0x00FFFFFF, moves);
+	free(moves);
 }
 
 int	control(int key, t_game *game)
