@@ -12,31 +12,32 @@
 
 #include "so_long.h"
 
-void	refresh_images_player(t_game *game, int x_pos, int y_pos, char flag)
+void	refresh_images_player(t_game *game, int x, int y, char flag)
 {
-	load_images(&game->floor, game, x_pos, y_pos);
-	load_images(&game->exit, game, game->exit_x, game->exit_y);
+	mlx_clear_window(game->initmlx, game->winmlx);
+	put_images(game);
+	mlx_put_image_to_window(game->initmlx, game->winmlx, game->floor.ptr, x * 64, y * 64);
+	mlx_put_image_to_window(game->initmlx, game->winmlx, game->exit.ptr, game->exit_x * 64, game->exit_y * 64);
 	if (flag == 'w')
 	{
-		load_images(&game->floor, game, x_pos, y_pos - 1);
-		load_images(&game->player, game, x_pos, y_pos - 1);
+		mlx_put_image_to_window(game->initmlx, game->winmlx, game->floor.ptr, x * 64, (y - 1) * 64);
+		mlx_put_image_to_window(game->initmlx, game->winmlx, game->player.ptr, x * 64, (y - 1) * 64);
 	}
 	else if (flag == 'a')
 	{
-		load_images(&game->floor, game, x_pos - 1, y_pos);
-		load_images(&game->player, game, x_pos - 1, y_pos);
+		mlx_put_image_to_window(game->initmlx, game->winmlx, game->floor.ptr, (x - 1) * 64, y * 64);
+		mlx_put_image_to_window(game->initmlx, game->winmlx, game->player.ptr, (x - 1) * 64, y * 64);
 	}
 	else if (flag == 's')
 	{
-		load_images(&game->floor, game, x_pos, y_pos + 1);
-		load_images(&game->player, game, x_pos, y_pos + 1);
+		mlx_put_image_to_window(game->initmlx, game->winmlx, game->floor.ptr, x * 64, (y + 1) * 64);
+		mlx_put_image_to_window(game->initmlx, game->winmlx, game->player.ptr, x * 64, (y + 1) * 64);
 	}
 	else if (flag == 'd')
 	{
-		load_images(&game->floor, game, x_pos + 1, y_pos);
-		load_images(&game->player, game, x_pos + 1, y_pos);
+		mlx_put_image_to_window(game->initmlx, game->winmlx, game->floor.ptr, (x + 1) * 64, y * 64);
+		mlx_put_image_to_window(game->initmlx, game->winmlx, game->player.ptr, (x + 1) * 64, y * 64);
 	}
-	mlx_put_image_to_window(game->initmlx, game->winmlx, game->img.ptr, 0, 0);
 }
 
 void	destroy_images(t_game *game)

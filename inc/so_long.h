@@ -59,8 +59,6 @@ typedef struct s_game
 
 	void	*initmlx;
 	void	*winmlx;
-
-	char	**buffer;
 }			t_game;
 
 /* --- Checker Functions --- */
@@ -78,7 +76,7 @@ t_data		create_image(char *path, t_game *game);
 void		put_images(t_game *game);
 void		put_pixel(t_game *game, int x, int y, int color);
 void		load_images(t_data *image, t_game *game, int x_pos, int y_pos);
-void		refresh_images_player(t_game *game, int x_pos, int y_pos,
+void		refresh_images_player(t_game *game, int x, int y,
 				char flag);
 void		destroy_images(t_game *game);
 int			read_characters(t_game *game);
