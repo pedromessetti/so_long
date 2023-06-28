@@ -6,28 +6,49 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:42:44 by pedro             #+#    #+#             */
-/*   Updated: 2023/06/27 21:01:13 by pedro            ###   ########.fr       */
+/*   Updated: 2023/06/28 09:05:36 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	refresh_images_player(t_game *game, int x, int y, char flag)
+void	flood_fill(char **map, int x, int y, int *counter)
 {
-	mlx_clear_window(game->initmlx, game->winmlx);
-	put_images(game);
-	mlx_put_image_to_window(game->initmlx, game->winmlx, game->floor.ptr, x
-		* 64, y * 64);
-	mlx_put_image_to_window(game->initmlx, game->winmlx, game->exit.ptr,
-		game->exit_x * 64, game->exit_y * 64);
-	if (flag == 'w')
-		container(game, x, y - 1);
-	else if (flag == 'a')
-		container(game, x - 1, y);
-	else if (flag == 's')
-		container(game, x, y + 1);
-	else if (flag == 'd')
-		container(game, x + 1, y);
+	if (map[y][x] == 'C' || map[y][x] == 'E')
+		*counter += 1;
+	if (map[y][x] == 'E')
+	{
+		map[y][x] = '1';
+		return ;
+	}
+	map[y][x] = 'F';
+	if (map[y][x + 1] != '1' && map[y][x + 1] != 'F')
+		flood_fill(map, x + 1, y, counter);
+	if (map[y][x - 1] != '1' && map[y][x - 1] != 'F')
+		flood_fill(map, x - 1, y, counter);
+	if (map[y + 1][x] != '1' && map[y + 1][x] != 'F')
+		flood_fill(map, x, y + 1, counter);
+	if (map[y - 1][x] != '1' && map[y - 1][x] != 'F')
+		flood_fill(map, x, y - 1, counter);
+}
+
+int	handle_flood_fill(t_game *game)
+{
+	int		counter;
+	char	**map_tmp;
+	int		i;
+
+	map_tmp = (char **)malloc(sizeof(char *) * (game->map_height + 1));
+	if (!map_tmp)
+		return (0);
+	counter = 0;
+	i = -1;
+	while (game->map[++i])
+		map_tmp[i] = ft_strdup(game->map[i]);
+	map_tmp[i] = NULL;
+	flood_fill(map_tmp, game->player_x, game->player_y, &counter);
+	free_matrix(map_tmp);
+	return (counter == (game->exit_count + game->collect_count));
 }
 
 void	container(t_game *game, int x, int y)
@@ -58,18 +79,4 @@ void	exit_game(t_game *game)
 	free(game->initmlx);
 	ft_printf("\nExit Fla Game\n");
 	exit(0);
-}
-
-void	save_coordenates(t_game *game, int y, int x, int opt)
-{
-	if (opt)
-	{
-		game->player_x = x;
-		game->player_y = y;
-		game->player_count++;
-		return ;
-	}
-	game->exit_x = x;
-	game->exit_y = y;
-	game->exit_count++;
 }

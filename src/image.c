@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 19:21:18 by pedro             #+#    #+#             */
-/*   Updated: 2023/06/27 20:56:21 by pedro            ###   ########.fr       */
+/*   Updated: 2023/06/28 08:31:16 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,22 @@ void	choose_image(t_game *game, int y, int x)
 	else if (game->map[y][x] == 'E')
 		mlx_put_image_to_window(game->initmlx, game->winmlx, game->exit.ptr, x
 			* 64, y * 64);
+}
+
+void	refresh_images_player(t_game *game, int x, int y, char flag)
+{
+	mlx_clear_window(game->initmlx, game->winmlx);
+	put_images(game);
+	mlx_put_image_to_window(game->initmlx, game->winmlx, game->floor.ptr, x
+		* 64, y * 64);
+	mlx_put_image_to_window(game->initmlx, game->winmlx, game->exit.ptr,
+		game->exit_x * 64, game->exit_y * 64);
+	if (flag == 'w')
+		container(game, x, y - 1);
+	else if (flag == 'a')
+		container(game, x - 1, y);
+	else if (flag == 's')
+		container(game, x, y + 1);
+	else if (flag == 'd')
+		container(game, x + 1, y);
 }

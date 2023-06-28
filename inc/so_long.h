@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 08:43:44 by pedro             #+#    #+#             */
-/*   Updated: 2023/06/27 21:02:45 by pedro            ###   ########.fr       */
+/*   Updated: 2023/06/28 09:07:03 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,11 @@ void		check_ac(int ac);
 
 /* --- Image functions --- */
 
-void		init_images(t_game *game);
 t_data		create_image(char *path, t_game *game);
+void		init_images(t_game *game);
 void		put_images(t_game *game);
-void		put_pixel(t_game *game, int x, int y, int color);
-void		load_images(t_data *image, t_game *game, int x_pos, int y_pos);
 void		refresh_images_player(t_game *game, int x, int y, char flag);
 void		destroy_images(t_game *game);
-int			read_characters(t_game *game);
 void		choose_image(t_game *game, int y, int x);
 void		container(t_game *game, int x, int y);
 
@@ -86,19 +83,22 @@ void		container(t_game *game, int x, int y);
 
 int			save_map_line(t_game *game, char *line);
 int			read_map(t_game *game, char *filepath);
+int			read_characters(t_game *game);
 void		save_coordenates(t_game *game, int y, int x, int opt);
-int			control(int key, t_game *game);
-void		flood_fill(char **map, int x, int y, int *counter);
-int			handle_flood_fill(t_game *game);
 void		map_error(t_game *game);
 
 /* --- Control Functions --- */
 
+int			control(int key, t_game *game);
 void		move_w(t_game *game);
 void		move_a(t_game *game);
 void		move_s(t_game *game);
 void		move_d(t_game *game);
-int			control(int key, t_game *game);
+
+/* --- Utils Functions --- */
+
+void		flood_fill(char **map, int x, int y, int *counter);
+int			handle_flood_fill(t_game *game);
 void		exit_game(t_game *game);
 
 #endif

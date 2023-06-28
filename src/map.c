@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:41:16 by pedro             #+#    #+#             */
-/*   Updated: 2023/06/25 20:31:46 by pedro            ###   ########.fr       */
+/*   Updated: 2023/06/28 09:05:11 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,49 @@ int	read_map(t_game *game, char *filepath)
 	if (game->map)
 		game->map_width = ft_strlen(game->map[0]) - 1;
 	return (1);
+}
+
+void	save_coordenates(t_game *game, int y, int x, int opt)
+{
+	if (opt)
+	{
+		game->player_x = x;
+		game->player_y = y;
+		game->player_count++;
+		return ;
+	}
+	game->exit_x = x;
+	game->exit_y = y;
+	game->exit_count++;
+}
+
+int	read_characters(t_game *game)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (++y < game->map_height)
+	{
+		x = -1;
+		while (++x < game->map_width)
+		{
+			if (game->map[y][x] == 'C')
+				game->collect_count++;
+			else if (game->map[y][x] == 'E')
+				save_coordenates(game, y, x, 0);
+			else if (game->map[y][x] == 'P')
+				save_coordenates(game, y, x, 1);
+			else if (game->map[y][x] != '1' && game->map[y][x] != '0')
+				return (0);
+		}
+	}
+	return (1);
+}
+
+void	map_error(t_game *game)
+{
+	write(2, "Error: Map not supported\n", 25);
+	free_matrix(game->map);
+	exit(EXIT_FAILURE);
 }
